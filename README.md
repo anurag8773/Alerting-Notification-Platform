@@ -19,3 +19,5 @@ Seeded users are created by `seed_data` (see management command). Default passwo
 Notes:
 - WebSocket connections use Django session auth (log in via admin or endpoints).
 - To test reminders, use the admin to create alerts and trigger the `trigger_reminders` admin action or let Celery Beat run every minute.
+- This file also include Postman Collection(AlertingPlatform.postman_collection) import it in Postman and test the entry points.
+ 

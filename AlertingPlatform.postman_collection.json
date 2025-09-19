@@ -1,0 +1,138 @@
+{
+  "info": {
+    "name": "Alerting Platform API",
+    "_postman_id": "2f7c2d2b-5cce-4f6a-bdb2-9b5ad2aa0001",
+    "description": "Postman Collection for testing the Alerting & Notification Platform APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth - Login (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/x-www-form-urlencoded" }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/api-auth/login/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api-auth", "login", ""]
+        },
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "username", "value": "admin", "type": "text" },
+            { "key": "password", "value": "adminpass", "type": "text" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Create Alert",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": {
+          "raw": "http://localhost:8000/api/alerts/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "alerts", ""]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Server Maintenance\",\n  \"message\": \"DB upgrade at 2 AM\",\n  \"severity\": \"WARNING\",\n  \"delivery_types\": [\"IN_APP\"],\n  \"visibility_type\": \"ORG\",\n  \"reminder_frequency_minutes\": 120,\n  \"enabled\": true\n}"
+        }
+      }
+    },
+    {
+      "name": "Admin - Update Alert",
+      "request": {
+        "method": "PATCH",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": {
+          "raw": "http://localhost:8000/api/alerts/{{ALERT_ID}}/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "alerts", "{{ALERT_ID}}", ""]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"archived\": true }"
+        }
+      }
+    },
+    {
+      "name": "Admin - List Alerts",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/api/alerts/?severity=WARNING",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "alerts", ""],
+          "query": [{ "key": "severity", "value": "WARNING" }]
+        }
+      }
+    },
+    {
+      "name": "User - Fetch Alerts",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/api/user/alerts/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "user", "alerts", ""]
+        }
+      }
+    },
+    {
+      "name": "User - Mark Alert as Read",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:8000/api/user/alerts/{{ALERT_ID}}/read/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "user", "alerts", "{{ALERT_ID}}", "read", ""]
+        }
+      }
+    },
+    {
+      "name": "User - Snooze Alert",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:8000/api/user/alerts/{{ALERT_ID}}/snooze/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "user", "alerts", "{{ALERT_ID}}", "snooze", ""]
+        }
+      }
+    },
+    {
+      "name": "Analytics - Dashboard",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/api/analytics/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "analytics", ""]
+        }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "ALERT_ID", "value": "replace-this-alert-id" }
+  ]
+}
