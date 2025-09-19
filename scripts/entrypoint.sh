@@ -2,11 +2,11 @@
 set -e
 
 # Run migrations, collectstatic, seed and start ASGI server (uvicorn)
-python manage.py migrate --noinput || true
-python manage.py collectstatic --noinput || true
+python config/manage.py migrate --noinput || true
+python config/manage.py collectstatic --noinput || true
 
 # Seed data
-python manage.py seed_data || true
+python config/manage.py seed_data || true
 
 # Start uvicorn for ASGI (Channels)
-uvicorn config.asgi:application --host 0.0.0.0 --port 8000
+uvicorn config.config.asgi:application --host 0.0.0.0 --port 8000
